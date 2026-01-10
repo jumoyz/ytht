@@ -1,0 +1,44 @@
+{
+    "manifest_version": 3,
+    "name": "YTHT Downloader",
+    "version": "1.0.0",
+    "description": "Download YouTube and Facebook videos directly from your browser",
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://ytht.tmsht.com/*",
+        "https://ytht.local/*"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "YTHT Downloader",
+        "default_icon": {
+            "16": "icon.png",
+            "48": "icon.png",
+            "128": "icon.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.youtube.com/*",
+                "https://youtube.com/*",
+                "https://m.youtube.com/*",
+                "https://www.facebook.com/*",
+                "https://facebook.com/*",
+                "https://fb.watch/*"
+            ],
+            "js": ["content.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }
+}

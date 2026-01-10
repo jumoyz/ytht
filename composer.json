@@ -1,0 +1,13 @@
+{
+    "name": "ytht/downloader",
+    "description": "YouTube and Facebook video downloader",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "YTHT\\": "src/"
+        }
+    }
+}

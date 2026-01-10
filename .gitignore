@@ -1,0 +1,30 @@
+# Ignore dependencies
+/vendor/
+/node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Public downloads and temporary files
+/public/downloads/
+/tmp/
+*.log
+
+# IDEs and OS files
+/.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Composer
+/vendor/
+
+# PHPStorm
+.idea/
+
+# Service workers and build outputs
+service-worker.js
+
+# Ignore composer build artifacts
+build/

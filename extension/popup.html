@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 300px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn-mp4 {
+            background-color: #28a745;
+            color: white;
+        }
+        .btn-mp3 {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .url-display {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 12px;
+            word-break: break-all;
+        }
+        .loading {
+            text-align: center;
+            color: #6c757d;
+        }
+        .error {
+            color: #dc3545;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h3 style="margin: 0; color: #dc3545;">
+            <i class="fas fa-download"></i> YTHT
+        </h3>
+        <p style="margin: 5px 0; font-size: 12px; color: #6c757d;">
+            Download videos easily
+        </p>
+    </div>
+
+    <div id="content">
+        <div class="loading" id="loading">
+            <p>Detecting video...</p>
+        </div>
+
+        <div id="videoFound" style="display: none;">
+            <div class="url-display" id="currentUrl"></div>
+            <button class="btn btn-mp4" id="downloadMp4">
+                <i class="fas fa-film"></i> Download MP4
+            </button>
+            <button class="btn btn-mp3" id="downloadMp3">
+                <i class="fas fa-music"></i> Download MP3
+            </button>
+        </div>
+
+        <div id="noVideo" style="display: none;" class="error">
+            <p>No video detected on this page.</p>
+            <p>Visit YouTube or Facebook to download videos.</p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
