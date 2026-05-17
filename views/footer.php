@@ -1,18 +1,18 @@
 <footer class="mt-5 py-4 text-center text-white">
     <div class="container">
-        <p>&copy; <?php echo date('Y'); ?> YTHT Downloader. All rights reserved.</p>
+        <p>&copy; <?php echo date('Y'); ?> YTHT Downloader. <?= htmlspecialchars($t['all_rights_reserved']) ?></p>
         <p class="small">
             <a href="#" class="text-white text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#aboutModal">
-                About
+                <?= htmlspecialchars($t['about']) ?>
             </a>
             <a href="#" class="text-white text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#contactModal">
-                Conatct
+                <?= htmlspecialchars($t['contact']) ?>
             </a>
             <a href="#" class="text-white text-decoration-none me-3" data-bs-toggle="modal" data-bs-target="#privacyModal">
-                Privacy Policy
+                <?= htmlspecialchars($t['privacy_policy']) ?>
             </a>
             <a href="#" class="text-white text-decoration-none" data-bs-toggle="modal" data-bs-target="#termsModal">
-                Terms of Service
+                <?= htmlspecialchars($t['terms_of_service']) ?>
             </a>
         </p>
     </div>
@@ -23,7 +23,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">About YTHT Downloader</h5>
+                <h5 class="modal-title"><?= htmlspecialchars($t['about']) ?> YTHT Downloader</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -40,7 +40,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Contact</h5>
+                <h5 class="modal-title"><?= htmlspecialchars($t['contact']) ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -55,7 +55,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Privacy Policy</h5>
+                <h5 class="modal-title"><?= htmlspecialchars($t['privacy_policy']) ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -77,7 +77,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Terms of Service</h5>
+                <h5 class="modal-title"><?= htmlspecialchars($t['terms_of_service']) ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">

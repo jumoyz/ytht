@@ -6,7 +6,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <i class="fas fa-download me-2"></i>
+                <!-- logo -->
+                <img src="assets/images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+                <!-- <i class="fas fa-download me-2"></i> -->
                 <?php echo Config::APP_NAME; ?>
                 <small class="badge bg-danger ms-1">v<?php echo Config::VERSION; ?></small>
             </a>
@@ -47,25 +49,25 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <!-- Extension Download -->
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#extensionModal">
-                            <i class="fas fa-puzzle-piece me-1"></i>Get Extension
+                            <i class="fas fa-puzzle-piece me-1"></i><?php echo $t['get_extension']; ?>
                         </a>
                     </li>
                     
                     <!-- Login/Register -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user me-1"></i>Account
+                            <i class="fas fa-user me-1"></i><?php echo $t['account']; ?>
                         </a>
                         <ul class="dropdown-menu">
                             <?php if(isset($_SESSION['user'])): ?>
-                                <li><span class="dropdown-item-text">Welcome, <?php echo htmlspecialchars($_SESSION['user']['name']); ?></span></li>
+                                <li><span class="dropdown-item-text"><?php echo $t['welcome']; ?>, <?php echo htmlspecialchars($_SESSION['user']['name']); ?></span></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>Download History</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
-                                <li><a class="dropdown-item text-danger" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i><?php echo $t['download_history']; ?></a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i><?php echo $t['settings']; ?></a></li>
+                                <li><a class="dropdown-item text-danger" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i><?php echo $t['logout']; ?></a></li>
                             <?php else: ?>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fas fa-user-plus me-2"></i>Register</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-sign-in-alt me-2"></i><?php echo $t['login']; ?></a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerModal"><i class="fas fa-user-plus me-2"></i><?php echo $t['register']; ?></a></li>
                             <?php endif; ?>
                         </ul>
                     </li>
@@ -92,7 +94,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             <i class="fas fa-chrome fa-3x text-primary mb-3"></i>
                             <h5>Chrome Extension</h5>
                             <p>One-click downloads from YouTube & Facebook</p>
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" onclick="install()">
                                 <i class="fas fa-download me-2"></i>Install for Chrome
                             </button>
                         </div>
@@ -102,7 +104,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             <i class="fab fa-edge fa-3x text-info mb-3"></i>
                             <h5>Edge Extension</h5>
                             <p>Works on Microsoft Edge browser</p>
-                            <button class="btn btn-info text-white">
+                            <button class="btn btn-info text-white" onclick="install()">
                                 <i class="fas fa-download me-2"></i>Install for Edge
                             </button>
                         </div>
@@ -153,9 +155,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     
                     <div class="text-center">
                         <p class="mb-3">Or login with</p>
+                        <!-- Google Sign-In -->
+                        <div id="g_id_onload"
+                            data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                            data-login_uri="https://yourdomain.com/google_oauth.php"
+                            data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin" data-type="standard"></div>
+                        <!--
                         <button type="button" class="btn btn-outline-danger w-100" onclick="googleLogin()">
                             <i class="fab fa-google me-2"></i>Google
-                        </button>
+                        </button> -->
                     </div>
                 </form>
                 
@@ -214,9 +224,17 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     
                     <div class="text-center">
                         <p class="mb-3">Or register with</p>
+                        <!-- Google Sign-In -->
+                        <div id="g_id_onload"
+                            data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                            data-login_uri="https://yourdomain.com/google_oauth.php"
+                            data-auto_prompt="false">
+                        </div>
+                        <div class="g_id_signin" data-type="standard"></div>
+                        <!--
                         <button type="button" class="btn btn-outline-danger w-100" onclick="googleLogin()">
                             <i class="fab fa-google me-2"></i>Google
-                        </button>
+                        </button> -->
                     </div>
                 </form>
             </div>
@@ -255,14 +273,86 @@ function googleLogin() {
 }
 
 // Handle login form
-document.getElementById('loginForm')?.addEventListener('submit', function(e) {
+document.getElementById('loginForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    alert('Login functionality would be implemented here.');
+
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
+
+    if (!email || !password) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Send to backend
+    try {
+        const response = await fetch('api.php?endpoint=login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password, remember: document.getElementById('rememberMe').checked })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert('Login successful!');
+            $('#loginModal').modal('hide');
+            location.reload();
+        } else {
+            alert(result.message || 'Invalid credentials.');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Server error. Please try again.');
+    }
 });
 
 // Handle register form
-document.getElementById('registerForm')?.addEventListener('submit', function(e) {
+document.getElementById('registerForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    alert('Registration functionality would be implemented here.');
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('registerEmail').value.trim();
+    const password = document.getElementById('registerPassword').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
+    const acceptTerms = document.getElementById('acceptTerms').checked;
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        alert('Please fill in all fields.');
+        return;
+    }
+    if (password.length < 8) {
+        alert('Password must be at least 8 characters.');
+        return;
+    }
+    if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+    }
+    if (!acceptTerms) {
+        alert('You must accept the terms.');
+        return;
+    }
+
+    // Send to backend
+    try {
+        const response = await fetch('api.php?endpoint=register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ firstName, lastName, email, password })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert('Registration successful!');
+            $('#registerModal').modal('hide');
+            location.reload();
+        } else {
+            alert(result.message || 'Registration failed.');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Server error. Please try again.');
+    }
 });
 </script>

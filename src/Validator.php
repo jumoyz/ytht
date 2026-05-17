@@ -1,7 +1,14 @@
 <?php
 /**
-*
-*
+ * Validator class for YTHT Downloader
+ * Provides static methods for validating URLs and sanitizing filenames 
+ * Ensures only supported domains are processed and filenames are safe for filesystem use   
+ * Supports YouTube and Facebook URLs, and prevents invalid characters in filenames 
+ * Designed to be used across the application for consistent validation logic   
+ * Example usage:
+ * Validator::validateUrl($url); // Throws exception if invalid
+ * $sanitized = Validator::sanitizeFilename($filename); // Returns safe filename    
+ * This class is crucial for maintaining security and integrity of the application by preventing malicious input and ensuring compatibility with filesystem constraints
 */
 class Validator {
     public static function validateUrl($url) {

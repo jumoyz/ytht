@@ -124,8 +124,20 @@ ytht-downloader/
 │
 ├── src/                         # PHP backend logic
 │   ├── Downloader.php           # Core class for handling yt-dlp
+│   ├── LyricsGenerator.php      # Lyrics generation logic
 │   ├── Validator.php            # URL validation logic
 │   └── Config.php               # Environment config (dev/prod)
+│
+├── api/                        # API endpoints
+│   ├── login.php               # logic
+│   ├── register.php            # logic
+│   ├── logout.php              # logic
+│   └── forgot.php              # logic
+│
+├── config/                     # PHP backend logic
+│   ├── db.php                  # Database connection
+│   ├── config.php              # Configuration
+│   └── mailer.php              # PHPMailer config
 │
 ├── views/                       # HTML templates
 │   ├── header.php
@@ -134,7 +146,10 @@ ytht-downloader/
 │
 ├── services/                       # Services
 │   ├── youtube-dl.exe
-│   └── yt-dlp.exe                 
+│   ├── yt-dlp.exe       
+│   ├── whisper/
+│   │   ├── transcribe.py
+│   │   └── requirements.txt          
 │
 ├── extension/                   # Chrome/Edge browser extension
 │   ├── manifest.json
@@ -144,7 +159,10 @@ ytht-downloader/
 │   ├── popup.js
 │   └── icon.png
 │
-├── .htaccess                    # Apache config (if needed)
+├── vendor/                   # composer dependencies
+│
+├── .env                        # Environment variable
+├── .htaccess                   # Apache config (if needed)
 ├── composer.json               # PHP dependencies (optional)
 ├── README.md                   # Project documentation
 └── LICENSE                     # License file

@@ -117,7 +117,14 @@ body {
     }
     
     .input-group {
-        flex-direction: column;
+        flex-direction: row;
+        align-items: stretch; /* Align heights */
+
+    }
+
+    .input-group input {
+        flex: 1 1 auto;   /* input grows to fill space */
+        min-width: 0;     /* prevents overflow */
     }
     
     .input-group .btn {
@@ -125,6 +132,8 @@ body {
         margin-top: 10px;
         align-self: flex-end;
     }
+
+
 }
 
 /* PWA install prompt */
